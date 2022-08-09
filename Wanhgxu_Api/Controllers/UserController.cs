@@ -12,6 +12,7 @@ namespace Wanhgxu_Api.Controllers
     [Authorize]
     public class UserController : ControllerBase
     {
+        private readonly ILogger<UserController> _Logger;
         private readonly UserBll _userBll;
         public UserController(UserBll userBll)
         {
@@ -37,6 +38,7 @@ namespace Wanhgxu_Api.Controllers
         [AllowAnonymous]
         public async Task<ApiResultTypeBasic<Token>> Login(string Account,string Password)
         {
+            //_Logger.LogInformation("登录日志测试");
             var data = await this._userBll.GetUserList(Account,Password);
             return data;
         }

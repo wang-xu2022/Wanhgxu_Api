@@ -16,7 +16,7 @@ namespace Wangxuapi.Core.Service.UserBll
 {
     public class UserBll
     {
-        public ILogger<UserBll> _Logger;
+        private readonly ILogger<UserBll> _Logger;
 
         private readonly ICityDAL _cityDAL;
         public UserBll(ICityDAL cityDAL)
