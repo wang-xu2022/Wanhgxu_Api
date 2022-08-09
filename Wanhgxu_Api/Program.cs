@@ -50,6 +50,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ICityDAL, CityDAL>();
 builder.Services.AddScoped<UserBll>();
+builder.Logging.AddLog4Net("log4net.Config");　　//括号内容为上面配置文件所在地址，我这里是放在根目录下的CfgFile文件下。
 //为Swagger配置JWT
 builder.Services.AddSwaggerGen(option => {
     option.SwaggerDoc("v1", new OpenApiInfo

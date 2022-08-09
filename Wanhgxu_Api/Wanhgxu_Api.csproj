@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
@@ -20,13 +21,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="6.1.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Waangxuapi.Core.DAL\Wangxuapi.Core.DAL.csproj" />
     <ProjectReference Include="..\Wangxuapi.Core.Common\Wangxuapi.Core.Common.csproj" />
     <ProjectReference Include="..\wangxuapi.Core.Model\Wangxuapi.Core.Model.csproj" />
     <ProjectReference Include="..\Wangxuapi.Core.Service\Wangxuapi.Core.Service.csproj" />

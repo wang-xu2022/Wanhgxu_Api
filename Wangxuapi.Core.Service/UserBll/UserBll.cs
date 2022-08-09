@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace Wangxuapi.Core.Service.UserBll
 {
     public class UserBll
     {
+        public ILogger<UserBll> _Logger;
+
         private readonly ICityDAL _cityDAL;
         public UserBll(ICityDAL cityDAL)
         {
@@ -72,6 +75,7 @@ namespace Wangxuapi.Core.Service.UserBll
             }
             catch (Exception ex)
             {
+                _Logger.LogInformation("登录接口接口"+ex.ToString());
                 return result; ;
             }
         }
@@ -114,6 +118,7 @@ namespace Wangxuapi.Core.Service.UserBll
             }
             catch (Exception ex )
             {
+                _Logger.LogInformation("创建用户" + ex.ToString());
                 return result;
             }
         }
@@ -138,8 +143,8 @@ namespace Wangxuapi.Core.Service.UserBll
             }
             catch (Exception ex)
             {
+                _Logger.LogInformation("删除用户接口" + ex.ToString());
                 return result;
-                throw;
             }
         }
     }
