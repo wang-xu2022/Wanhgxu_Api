@@ -28,17 +28,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(new AppSettings(configuration));
 var Connection = AppSettings.App(new string[] { "AppSettings", "ConnectionString" });
 Console.WriteLine($"ConnectionString:{Connection}");
-//Connection通过读取配置文件得到，其实就是数据库连接字符串，如何读取前面讲过
+//Connection通过读取配置文件得到，其实就是数据库连接字符串。
 builder.Services.AddDbContext<EFDbContext>(options =>
 options.UseSqlServer(Connection));
+
 ////读取Mysql配置文件
 //var MySqlConnection = AppSettings.App(new string[] { "AppSettings", "MyConnectionString" });
-////Connection通过读取配置文件得到，其实就是数据库连接字符串，如何读取前面讲过
+////Connection通过读取配置文件得到，其实就是数据库连接字符串。
 //builder.Services.AddDbContext<CodeFirstContext>(options =>
 //  options.UseMySql(MySqlConnection, new MySqlServerVersion(new Version(8, 0, 2))));
 
 // Add services to the container.
-//跨域
+
+
+//跨域HTTP请求
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -51,7 +54,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<ICityDAL, CityDAL>();
 builder.Services.AddScoped<UserBll>();
 
-//log4net
+//log4net配置错误日志
 builder.Services.AddLogging(loggingBuilder =>
 {
     loggingBuilder.AddLog4Net("log4net.config");
@@ -88,18 +91,23 @@ builder.Services.AddAuthorizationSetup();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
+    //配置Swagger中间件
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler("/Error");//捕获以下中间件中引发的异常
+    app.UseHsts();//HTTP 严格传输安全协议 (HSTS) 中间件
 }
 
 //app.UseHttpsRedirection();
 app.UseRouting();
-//身份验证
+//身份验证中间件
 app.UseAuthentication();
-
-app.UseAuthorization();
-//注册中间件
+//注册中间件UseCors、UseAuthentication 和 UseAuthorization 必须按显示的顺序出现
 app.UseCors();
+//用于授权用户访问安全资源的授权中间件 
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

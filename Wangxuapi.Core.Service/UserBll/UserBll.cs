@@ -84,29 +84,33 @@ namespace Wangxuapi.Core.Service.UserBll
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<ApiResultRoot> CreateUser(User user)
+        public async Task<ApiResultRoot> CreateUser(string Account, string Password, string Name, int Age)
         {
             ApiResultRoot result=new ApiResultRoot() { msg="添加失败",code=-200};
             try
             {
-                if(string.IsNullOrWhiteSpace(user.Account))
+                if(string.IsNullOrWhiteSpace(Account))
                 {
                     result.msg = "账号不能为空";
                     return result;
                 }
-                if (string.IsNullOrWhiteSpace(user.Name))
+                if (string.IsNullOrWhiteSpace(Name))
                 {
                     result.msg = "姓名不能为空";
                     return result;
                 }
-                if(string.IsNullOrEmpty(user.Password))
+                if(string.IsNullOrEmpty(Password))
                 {
                     result.msg = "密码不能为空";
                     return result;
                 }
-                user.CreatDate=DateTime.Now;//默认时间
+                User user = new User();
+                user.Account = Account;
+                user.Password = SafetyHelper.MD5Hex(Password);
+                user.Name = Name;
+                user.Age = Age;
+                user.CreatDate =DateTime.Now;//默认时间
                 user.Status = 1;//状态
-                user.Password= SafetyHelper.MD5Hex(user.Password);
                 int list = await this._cityDAL.Add(user);
                 if (list > 0)
                 {

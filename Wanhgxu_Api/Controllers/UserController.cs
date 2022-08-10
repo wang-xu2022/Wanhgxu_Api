@@ -21,15 +21,18 @@ namespace Wanhgxu_Api.Controllers
         /// <summary>
         /// 创建用户
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="Account">账号</param>
+        /// <param name="Password">密码</param>
+        /// <param name="Name">姓名</param>
+        /// <param name="Age">年龄</param>
         /// <returns></returns>
         [HttpPost("CreateUser")]
-        public async Task<ApiResultRoot> CreateUser(User user)
+        public async Task<ApiResultRoot> CreateUser([FromForm] string Account, [FromForm] string Password, [FromForm] string Name, [FromForm] int Age)
         {
-            return await this._userBll.CreateUser(user);
+            return await this._userBll.CreateUser(Account, Password, Name,Age);
         }
         /// <summary>
-        /// 登入
+        /// 登录
         /// </summary>
         /// <param name="Account">账号</param>
         /// <param name="Password">密码</param>
@@ -46,7 +49,7 @@ namespace Wanhgxu_Api.Controllers
         /// 解析Token
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("ParseToken")]
         public IActionResult ParseToken()
         {
             //需要截取Bearer 
