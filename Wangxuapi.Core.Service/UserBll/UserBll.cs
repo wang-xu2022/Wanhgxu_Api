@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Waangxuapi.Core.DAL.IHelper;
 using Wangxuapi.Core.Common.Helper;
 using Wangxuapi.Core.Common.MD5;
+using Wangxuapi.Core.DAL.DAL;
 using Wangxuapi.Core.Model;
 using Wangxuapi.Core.Model.Common;
 using Wangxuapi.Core.Model.Model;
@@ -150,6 +151,12 @@ namespace Wangxuapi.Core.Service.UserBll
                 _Logger.LogInformation("删除用户接口" + ex.ToString());
                 return result;
             }
+        }
+
+        public static User GerUserListssss()
+        {
+            var list = UserDal.GetList();
+            return list;
         }
     }
 }

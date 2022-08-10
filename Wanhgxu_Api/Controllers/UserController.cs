@@ -67,5 +67,11 @@ namespace Wanhgxu_Api.Controllers
         {
             return await this._userBll.DeleteUser(userId);
         }
+        [HttpGet("GerUserListssss")]
+        [AllowAnonymous]
+        public  User GerUserListssss()
+        {
+            return UserBll.GerUserListssss();
+        }
     }
 }

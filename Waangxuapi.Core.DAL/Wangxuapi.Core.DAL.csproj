@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Wangxuapi.Core.Common\Wangxuapi.Core.Common.csproj" />
     <ProjectReference Include="..\wangxuapi.Core.Model\Wangxuapi.Core.Model.csproj" />
   </ItemGroup>
 
